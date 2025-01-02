@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猜数字游戏</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+        .game-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        input {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+            width: 100px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 18px;
+            min-height: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>猜数字游戏</h1>
+        <p>我已经想好了一个1到100之间的数字，你来猜猜看！</p>
+        <input type="number" id="guessInput" min="1" max="100">
+        <button onclick="checkGuess()">猜！</button>
+        <p id="message"></p>
+        <button onclick="resetGame()" id="resetBtn" style="display: none;">重新开始</button>
+    </div>
+
+    <script>
+        let targetNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        function checkGuess() {
+            const guess = parseInt(document.getElementById('guessInput').value);
+            const messageElement = document.getElementById('message');
+            attempts++;
+
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                messageElement.style.color = 'red';
+                messageElement.textContent = '请输入1到100之间的有效数字！';
+                return;
+            }
+
+            if (guess === targetNumber) {
+                messageElement.style.color = 'green';
+                messageElement.textContent = `恭喜你！猜对了！共猜了${attempts}次。`;
+                document.getElementById('resetBtn').style.display = 'inline-block';
+            } else if (guess < targetNumber) {
+                messageElement.style.color = 'blue';
+                messageElement.textContent = '猜小了，再试试！';
+            } else {
+                messageElement.style.color = 'blue';
+                messageElement.textContent = '猜大了，再试试！';
+            }
+        }
+
+        function resetGame() {
+            targetNumber = Math.floor(Math.random() * 100) + 1;
+            attempts = 0;
+            document.getElementById('message').textContent = '';
+            document.getElementById('guessInput').value = '';
+            document.getElementById('resetBtn').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
