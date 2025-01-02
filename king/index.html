@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>抽卡游戏</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="status">
+            <span>钻石: <span id="gems">1000</span></span>
+        </div>
+        
+        <div class="card-display" id="cardDisplay">
+            <!-- 卡片将在这里显示 -->
+        </div>
+        
+        <div class="buttons">
+            <button onclick="drawOnce()" class="btn">单抽 (100钻石)</button>
+            <button onclick="drawTen()" class="btn">十连抽 (1000钻石)</button>
+        </div>
+        
+        <div class="history" id="history">
+            <!-- 抽卡历史记录 -->
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html> 
